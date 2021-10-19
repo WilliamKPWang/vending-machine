@@ -1,0 +1,14 @@
+com\w\vendingmachine\DAO\VendingMachineDAOImpl.class
+com\w\vendingmachine\DAO\VendingMachineDAO.class
+com\w\vendingmachine\DTO\Item.class
+com\w\vendingmachine\DAO\VendingMachinePersistenceException.class
+com\w\vendingmachine\DTO\VendingMachine.class
+com\w\vendingmachine\UI\UserIOImpl.class
+com\w\vendingmachine\DTO\COIN.class
+com\w\vendingmachine\UI\VendingMachineView.class
+com\w\vendingmachine\App.class
+com\w\vendingmachine\service\VendingMachineServiceImpl.class
+com\w\vendingmachine\UI\UserIO.class
+com\w\vendingmachine\controllers\VendingMachineController.class
+com\w\vendingmachine\DAO\VendingMachineAuditDAO.class
+com\w\vendingmachine\service\VendingMachineService.class
