@@ -7,6 +7,7 @@ package com.w.vendingmachine.service;
 import com.w.vendingmachine.DAO.VendingMachinePersistenceException;
 import com.w.vendingmachine.DTO.COIN;
 import com.w.vendingmachine.DTO.Item;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 /**
@@ -18,9 +19,10 @@ public interface VendingMachineService {
     Map<String, Item> getAllItems() throws
             VendingMachinePersistenceException;
 
-    String getGetBalance();
+    String getGetBalance()throws FileNotFoundException;
 
     Item buyItem(String itemName) throws
-            VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException;
-    Map<COIN, Integer>  getChange();
+            VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException, FileNotFoundException;
+
+    Map<COIN, Integer> getChange() throws FileNotFoundException;
 }

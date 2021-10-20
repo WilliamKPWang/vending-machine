@@ -4,6 +4,7 @@ import com.w.vendingmachine.DAO.VendingMachineDAO;
 import com.w.vendingmachine.DAO.VendingMachinePersistenceException;
 import com.w.vendingmachine.DTO.COIN;
 import com.w.vendingmachine.DTO.Item;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class VendingMachineServiceImpl implements VendingMachineService {
     }
 
     @Override
-    public Item buyItem(String itemName) throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException {
+    public Item buyItem(String itemName) throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException, FileNotFoundException{
         Map<String, Item> items = dao.getAllItems();
         CheckStock(itemName);
         CheckFunds(itemName);
@@ -55,7 +56,7 @@ public class VendingMachineServiceImpl implements VendingMachineService {
         }
     }
 
-    private void CheckFunds(String itemName) throws VendingMachinePersistenceException, InsufficientFundsException {
+    private void CheckFunds(String itemName) throws VendingMachinePersistenceException, InsufficientFundsException , FileNotFoundException{
         Map<String, Item> items = dao.getAllItems();
         if (items.get(itemName).getCost().compareTo(dao.GetBalance()) == 1) {
             throw new InsufficientFundsException("not enough funds");
@@ -63,7 +64,7 @@ public class VendingMachineServiceImpl implements VendingMachineService {
     }
 
     @Override
-    public Map<COIN, Integer> getChange() {
+    public Map<COIN, Integer> getChange() throws FileNotFoundException{
         Map<COIN, Integer> change = new HashMap<>();
 
         BigDecimal balance = dao.GetBalance();
@@ -77,7 +78,7 @@ public class VendingMachineServiceImpl implements VendingMachineService {
     }
 
     @Override
-    public String getGetBalance() {
+    public String getGetBalance() throws FileNotFoundException{
         return NumberFormat.getCurrencyInstance().format(dao.GetBalance());
 
     }

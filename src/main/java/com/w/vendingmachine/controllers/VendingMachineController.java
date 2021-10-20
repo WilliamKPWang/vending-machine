@@ -9,6 +9,7 @@ import com.w.vendingmachine.UI.VendingMachineView;
 import com.w.vendingmachine.service.InsufficientFundsException;
 import com.w.vendingmachine.service.NoItemInventoryException;
 import com.w.vendingmachine.service.VendingMachineServiceImpl;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 
 /**
@@ -66,14 +67,17 @@ public class VendingMachineController {
         view.DisplayExitBanner();
     }
 
-
     private void AddMoney(BigDecimal deposit) {
         try {
             service.getAddMoney(deposit);
         } catch (VendingMachinePersistenceException e) {
             view.DisplayErrorMessage(e.getMessage());
         }
-        view.PrintCurrentBalance(service.getGetBalance());
+        try {
+            view.PrintCurrentBalance(service.getGetBalance());
+        } catch (FileNotFoundException e) {
+            view.DisplayErrorMessage(e.getMessage());
+        }
     }
 
     private void PrintCandyMenu() throws VendingMachinePersistenceException {
@@ -86,7 +90,7 @@ public class VendingMachineController {
             view.PrintCurrentBalance(service.getGetBalance());
             view.PrintChange(service.getChange());
 
-        } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException e) {
+        } catch (VendingMachinePersistenceException | InsufficientFundsException | NoItemInventoryException | FileNotFoundException e) {
             view.DisplayErrorMessage(e.getMessage());
         }
     }
